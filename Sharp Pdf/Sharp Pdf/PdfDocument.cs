@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Sharp_Pdf
 {
@@ -46,7 +47,7 @@ namespace Sharp_Pdf
         {
             PdfPage pageToAdd;
             
-            _pages.Add(pageToAdd = new PdfPage());
+            _pages.Add(pageToAdd = new PdfPage(dimension));
 
             return pageToAdd;
         }
@@ -64,15 +65,33 @@ namespace Sharp_Pdf
                 _pages.RemoveAt(index);
             }
         }
-
+        
         public byte[] AsBinary()
         {
-            
+            return null;
         }
 
+        public async Task<byte[]> AsBinaryAsync()
+        {
+            return null;
+        }
+        
         public void Save(string filePath)
         {
-            
+            using (var stream = File.Open(filePath, FileMode.Create))
+            {
+                stream.WriteByte((byte) 0);
+            }
+        }
+
+        public async Task SaveAsync(string filePath)
+        {
+            using (var stream = File.Open(filePath, FileMode.Create))
+            {
+                byte[] data = new byte[] {1};
+                
+                await stream.WriteAsync(data, 0,data.Length);
+            }
         }
     }
 }

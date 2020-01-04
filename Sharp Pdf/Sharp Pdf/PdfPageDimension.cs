@@ -4,13 +4,13 @@ namespace Sharp_Pdf
 {
     public class PdfPageDimension
     {
-        public const PdfPageDimension A0 = new PdfPageDimension();
-        public const PdfPageDimension A1 = null;
-        public const PdfPageDimension A2 = null;
-        public const PdfPageDimension A3 = null;
-        public const PdfPageDimension A4 = null;
-        public const PdfPageDimension A5 = null;
-        public const PdfPageDimension Letter = null;
+        public static readonly PdfPageDimension A0 = new PdfPageDimension(2384f, 3370f);
+        public static readonly PdfPageDimension A1 = new PdfPageDimension(1685f, 2384f);
+        public static readonly PdfPageDimension A2 = new PdfPageDimension(1190f, 1685f);
+        public static readonly PdfPageDimension A3 = new PdfPageDimension(842f, 1190f);
+        public static readonly PdfPageDimension A4 = new PdfPageDimension(595f, 842f);
+        public static readonly PdfPageDimension A5 = new PdfPageDimension(420f, 595f);
+        public static readonly PdfPageDimension Letter = new PdfPageDimension(612f, 792f);
 
         public float Width
         {
