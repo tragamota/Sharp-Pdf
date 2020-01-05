@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sharp_Pdf
+namespace SharpPdf.Page
 {
     public class PdfPageDimension
     {

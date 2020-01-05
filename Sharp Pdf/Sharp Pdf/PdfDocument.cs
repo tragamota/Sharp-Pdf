@@ -2,8 +2,9 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
+using SharpPdf.Page;
 
-namespace Sharp_Pdf
+namespace SharpPdf
 {
     public class PdfDocument
     {
@@ -55,7 +56,7 @@ namespace Sharp_Pdf
             if (dimension == null) 
                 return pageToAdd;
             
-            _pages.Add(pageToAdd = new PdfPage(dimension));
+            _pages.Add(pageToAdd = new PdfPage(_pages.Count + 1, dimension));
 
             return pageToAdd;
         }
@@ -107,8 +108,8 @@ namespace Sharp_Pdf
             {
                 //print warning
             }
-
-            await using (var stream = File.Open(filePath, FileMode.Create))
+            
+            using (var stream = File.Open(filePath, FileMode.Create))
             {
                 byte[] data = new byte[] {1};
                 
