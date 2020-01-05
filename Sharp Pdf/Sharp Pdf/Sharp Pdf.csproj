@@ -5,8 +5,4 @@
         <RootNamespace>Sharp_Pdf</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Utils" />
-    </ItemGroup>
-
 </Project>

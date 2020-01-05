@@ -11,7 +11,7 @@ namespace Sharp_Pdf
         {
             get { return _documentInfo; }
         }
-
+        
         public ReadOnlyCollection<PdfPage> Pages
         {
             get { return _pages.AsReadOnly(); }
@@ -35,7 +35,7 @@ namespace Sharp_Pdf
         {
             var totalPages = TotalPages();
 
-            if (!((pageNumber < 0) || (pageNumber >= totalPages)))
+            if (!(pageNumber < 0 || pageNumber >= totalPages))
             {
                 return _pages[pageNumber];
             }
@@ -43,9 +43,17 @@ namespace Sharp_Pdf
             return default;
         }
 
+        public PdfPage AddPage()
+        {
+            return AddPage(PdfPageDimension.A4);
+        }
+        
         public PdfPage AddPage(PdfPageDimension dimension)
         {
-            PdfPage pageToAdd;
+            PdfPage pageToAdd = null;
+            
+            if (dimension == null) 
+                return pageToAdd;
             
             _pages.Add(pageToAdd = new PdfPage(dimension));
 
@@ -61,23 +69,32 @@ namespace Sharp_Pdf
         {
             var totalPages = TotalPages();
             
-            if(!((index < 0) || (index >= totalPages))) {
+            if(!(index < 0 || index >= totalPages)) {
                 _pages.RemoveAt(index);
             }
         }
         
         public byte[] AsBinary()
         {
+            //check if document has 1 or more pages
+            
             return null;
         }
 
         public async Task<byte[]> AsBinaryAsync()
         {
+            //check if document has 1 or more pages
+            
             return null;
         }
         
         public void Save(string filePath)
         {
+            if (!IsValidFileExtension(Path.GetExtension(filePath)))
+            {
+                //print warning
+            }
+            
             using (var stream = File.Open(filePath, FileMode.Create))
             {
                 stream.WriteByte((byte) 0);
@@ -86,12 +103,25 @@ namespace Sharp_Pdf
 
         public async Task SaveAsync(string filePath)
         {
-            using (var stream = File.Open(filePath, FileMode.Create))
+            if (!IsValidFileExtension(Path.GetExtension(filePath)))
+            {
+                //print warning
+            }
+
+            await using (var stream = File.Open(filePath, FileMode.Create))
             {
                 byte[] data = new byte[] {1};
                 
                 await stream.WriteAsync(data, 0,data.Length);
             }
+        }
+        
+        private bool IsValidFileExtension(string fileExtension)
+        {
+            if (fileExtension == null)
+                return false;
+            
+            return fileExtension.ToLower() == "pdf";
         }
     }
 }
