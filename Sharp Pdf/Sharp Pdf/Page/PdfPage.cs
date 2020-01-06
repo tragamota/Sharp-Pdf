@@ -2,17 +2,17 @@
 {
     public class PdfPage
     {
-        public int PageNumber
+        public PdfPageInfo PageInfo
         {
-            get { return _pageInfo._pageNumber; }
-            internal set { _pageInfo._pageNumber = value; }
+            get { return _pageInfo; }
         }
 
         private PdfPageInfo _pageInfo;
-        
+        private PdfPageResources _pageResources;
+
         internal PdfPage(int pageNumber, PdfPageDimension pageDimension)
-        {
-           
+        { 
+            _pageInfo = new PdfPageInfo(pageNumber, pageDimension);
         }
     }
 }

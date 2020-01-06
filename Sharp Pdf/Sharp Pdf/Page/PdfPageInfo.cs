@@ -1,16 +1,16 @@
 ﻿namespace SharpPdf.Page
 {
-    internal class PdfPageInfo
+    public class PdfPageInfo
     {
-        public int _pageNumber;
-        public PdfPageRotation _rotation;
-        public PdfPageDimension _dimension;
+        public int PageNumber { get; internal set; } 
+        public PdfPageRotation Rotation { get; set; }
+        public PdfPageDimension Dimension { get; internal set;  }
 
         internal PdfPageInfo(int pageNumber, PdfPageDimension dimension)
         {
-            _pageNumber = pageNumber;
-            _dimension = dimension;
-            _rotation = PdfPageRotation.ZERO_DEGREES;
+            PageNumber = pageNumber;
+            Dimension = dimension;
+            Rotation = PdfPageRotation.ZERO_DEGREES;
         }
     }
 }
