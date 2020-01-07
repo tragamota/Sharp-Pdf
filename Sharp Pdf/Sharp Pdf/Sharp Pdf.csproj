@@ -1,12 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
-        <RootNamespace>Sharp_Pdf</RootNamespace>
+        <RootNamespace>SharpPdf</RootNamespace>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     </PropertyGroup>
-
-    <ItemGroup>
-      <Folder Include="Utils" />
-    </ItemGroup>
 
 </Project>

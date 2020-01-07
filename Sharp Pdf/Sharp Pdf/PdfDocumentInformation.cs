@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sharp_Pdf
+namespace SharpPdf
 {
     public sealed class PdfDocumentInformation
     {
