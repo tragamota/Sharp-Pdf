@@ -6,5 +6,7 @@ namespace SharpPdf.Writer.Primitives
 {
     interface ICosBase
     {
+        CosType GetCosType();
+        byte[] ToBinaryValue();
     }
 }

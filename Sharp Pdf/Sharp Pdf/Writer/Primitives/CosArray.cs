@@ -4,7 +4,18 @@ using System.Text;
 
 namespace SharpPdf.Writer.Primitives
 {
-    class CosArray
+    internal class CosArray : ICosBase
     {
+        private const CosType Type = Primitives.CosType.Array;
+        
+        public CosType GetCosType()
+        {
+            return Type;
+        }
+
+        public byte[] ToBinaryValue()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
