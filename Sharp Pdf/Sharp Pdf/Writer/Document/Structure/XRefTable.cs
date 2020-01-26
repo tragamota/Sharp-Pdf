@@ -1,4 +1,4 @@
-﻿namespace SharpPdf.Writer.Document
+﻿namespace SharpPdf.Writer.Document.Structure
 {
     public class XRefTable
     {

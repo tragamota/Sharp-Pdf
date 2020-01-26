@@ -1,7 +1,6 @@
 ﻿namespace SharpPdf.Writer.Document
 {
-    public class Trailer
+    internal class PdfVersion
     {
-        
     }
 }
