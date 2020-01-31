@@ -2,7 +2,7 @@
 
 namespace SharpPdf.Writer.Document.Structure
 {
-    internal class XReferenceItem : IWritable
+    internal class XReferenceItem
     {
         public int ByteOffset
         {
@@ -28,13 +28,14 @@ namespace SharpPdf.Writer.Document.Structure
 
         public XReferenceItem()
         {
-            
+            _byteOffset = 0;
+            _generation = 0;
+            _inUse = false;
         }
-        
-        public byte[] ToWritableBinary()
+
+        public override string ToString()
         {
             StringBuilder xrefLineBuilder = new StringBuilder();
-            Encoding extendedAscii = Encoding.GetEncoding("ISO-8859-1");
 
             xrefLineBuilder.Append(_byteOffset.ToString("D10"));
             xrefLineBuilder.Append(' ');
@@ -43,7 +44,7 @@ namespace SharpPdf.Writer.Document.Structure
             xrefLineBuilder.Append(_inUse ? 'n' : 'f');
             xrefLineBuilder.Append("\r\n");
 
-            return extendedAscii.GetBytes(xrefLineBuilder.ToString());
+            return xrefLineBuilder.ToString();
         }
     }
 }

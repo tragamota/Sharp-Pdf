@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Text;
 
 namespace SharpPdf.Writer.Document.Structure
 {
-    internal class XRefTable : IWritable
+    internal class XRefTable
     {
         public int StartIndex
         {
             get => _startIndex;
             set => ChangeStartIndex(value);
+        }
+        
+        public XReferenceItem this[int index]
+        {
+            get { return _references[index]; }
         }
 
         private int _totalObjects;
@@ -26,7 +32,12 @@ namespace SharpPdf.Writer.Document.Structure
         
         private void AddInitialReference()
         {
-            _references.Add(new XReferenceItem());
+            _references.Add(new XReferenceItem()
+            {
+                ByteOffset = 0,
+                Generation = short.MaxValue,
+                InUse = false
+            });
         }
 
         public void ChangeStartIndex(int newIndex)
@@ -39,19 +50,40 @@ namespace SharpPdf.Writer.Document.Structure
             _startIndex = newIndex;
         }
         
-        public void AddObjectReference(XReferenceItem item)
+        public int AddObjectReference(XReferenceItem item)
         {
-            
+            _references.Add(item);
+
+            return ++_totalObjects;
         }
 
         public void RemoveObjectReference(int objectNumber)
         {
+            if (objectNumber < 0 || objectNumber >= _totalObjects)
+                throw new ArgumentOutOfRangeException();
             
+            _references.RemoveAt(objectNumber);
+
+            _totalObjects--;
         }
-        
-        public byte[] ToWritableBinary()
+
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            StringBuilder xrefBuilder = new StringBuilder();
+            
+            xrefBuilder.Append("xref");
+            xrefBuilder.Append("\n");
+            xrefBuilder.Append(_startIndex + ' ' + _totalObjects);
+            xrefBuilder.Append("\n");
+
+            foreach (XReferenceItem reference in _references)
+            {
+                xrefBuilder.Append(reference.ToString());
+            }
+
+            xrefBuilder.Append('\n');
+
+            return xrefBuilder.ToString();
         }
     }
 }

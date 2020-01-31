@@ -1,6 +1,9 @@
 ﻿namespace SharpPdf.Writer.Document
 {
-    internal class PdfVersion
+    internal enum PdfVersion
     {
-    }
+        Five,
+        Six,
+        Seven
+    }    
 }

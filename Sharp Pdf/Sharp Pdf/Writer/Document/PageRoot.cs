@@ -2,7 +2,7 @@
 
 namespace SharpPdf.Writer.Document
 {
-    public class PageRoot
+    internal class PageRoot
     {
         private readonly CosObject _rootObject;
         private readonly CosDictionary _rootDict;
@@ -11,5 +11,12 @@ namespace SharpPdf.Writer.Document
         {
             
         }
+
+        public void AddPageReference(CosReference pageReference)
+        {
+            
+        }
+        
+        
     }
 }
