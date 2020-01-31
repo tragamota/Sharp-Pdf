@@ -8,9 +8,6 @@ namespace SharpPdf.Writer.Primitives
     internal class CosDictionary : ICosBase
     {
         private const CosType Type = Primitives.CosType.Dictionary;
-
-        private const string DictionaryOpening = "<<";
-        private const string DictionaryClosing = ">>";
         
         public ICosBase this[string key]
         {
@@ -53,6 +50,24 @@ namespace SharpPdf.Writer.Primitives
         public byte[] ToBinaryValue()
         {
             throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder dictionaryBuilder = new StringBuilder();
+
+            dictionaryBuilder.AppendLine(WriteConstants.DictionaryOpening);
+            
+            foreach(KeyValuePair<CosName, ICosBase> valuePair in _dictionary)
+            {
+                dictionaryBuilder.Append(valuePair.Key.ToString());
+                dictionaryBuilder.Append(' ');
+                dictionaryBuilder.AppendLine(valuePair.Value.ToString());
+            }
+
+            dictionaryBuilder.Append(WriteConstants.DictionaryClosing);
+
+            return dictionaryBuilder.ToString();
         }
     }
 }

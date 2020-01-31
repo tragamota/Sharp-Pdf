@@ -24,5 +24,10 @@ namespace SharpPdf.Writer.Primitives
         {
             return Encoding.Unicode.GetBytes('/' + _name);
         }
+
+        public override string ToString()
+        {
+            return "/" + _name;
+        }
     }
 }

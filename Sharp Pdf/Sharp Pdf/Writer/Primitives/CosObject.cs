@@ -40,6 +40,11 @@ namespace SharpPdf.Writer.Primitives
                 _objectItem = objectItem;
         }
         
+        private static bool IsValidInternalObject(ICosBase internalObject)
+        {
+            return internalObject.GetCosType() != CosType.Object;
+        }
+        
         public CosType GetCosType()
         {
             return Type;
@@ -47,18 +52,23 @@ namespace SharpPdf.Writer.Primitives
 
         public byte[] ToBinaryValue()
         {
-            var header = Encoding.Unicode.GetBytes(_objectNumber.ToString() + " " +
-                                                   _revision.ToString() + " " +
-                                                   StartObject + "\n");
-            var data = _objectItem.ToBinaryValue();
-            var footer = Encoding.Unicode.GetBytes(EndObject + "\n");
-
-            return ArrayUtil.ConcatArrays(header, data, footer);
+            return Encoding.GetEncoding(WriteConstants.PdfEncoding).GetBytes(ToString());
         }
 
-        private static bool IsValidInternalObject(ICosBase internalObject)
+        public override string ToString()
         {
-            return internalObject.GetCosType() != CosType.Object;
+            StringBuilder cosObjectBuilder = new StringBuilder();
+
+            cosObjectBuilder.Append(_objectNumber.ToString());
+            cosObjectBuilder.Append(' ');
+            cosObjectBuilder.Append(_revision.ToString());
+            cosObjectBuilder.Append(' ');
+            cosObjectBuilder.AppendLine(StartObject);
+
+            cosObjectBuilder.AppendLine(_objectItem.ToString());
+            cosObjectBuilder.Append(EndObject);
+
+            return cosObjectBuilder.ToString();
         }
     }
 }

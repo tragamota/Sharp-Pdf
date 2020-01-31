@@ -17,5 +17,10 @@ namespace SharpPdf.Writer.Primitives
         {
             throw new NotImplementedException();
         }
+
+        public override string ToString()
+        {
+            return null;
+        }
     }
 }

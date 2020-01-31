@@ -26,5 +26,18 @@ namespace SharpPdf.Writer.Primitives
                                              " " + _revision.ToString() +
                                              " R");
         }
+
+        public override string ToString()
+        {
+            StringBuilder referenceBuilder = new StringBuilder();
+
+            referenceBuilder.Append(_objectNumber);
+            referenceBuilder.Append(' ');
+            referenceBuilder.Append(_revision);
+            referenceBuilder.Append(' ');
+            referenceBuilder.Append("R");
+
+            return referenceBuilder.ToString();
+        }
     }
 }
