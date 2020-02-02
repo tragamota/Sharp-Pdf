@@ -8,10 +8,16 @@
         public const string SingleBasedNewLine = "\n";
         public const string DoubleBasedNewLine = "\r\n";
         
+        public const string StartObject = "obj";
+        public const string EndObject = "endobj";
+        
         public const string DictionaryOpening = "<<";
         public const string DictionaryClosing = ">>";
 
         public const string ArrayOpening = "[";
         public const string ArrayClosing = "]";
+        
+        public const string TrailerHeader = "trailer";
+        public const string XRefHeader = "startxref";
     }
 }
