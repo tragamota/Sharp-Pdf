@@ -10,9 +10,6 @@ namespace SharpPdf.Writer.Primitives
     {
         private const CosType Type = CosType.Object;
 
-        private const string StartObject = "obj";
-        private const string EndObject = "endobj";
-
         public ICosBase InternalObject
         {
             get { return _objectItem; }
@@ -25,26 +22,34 @@ namespace SharpPdf.Writer.Primitives
             }
         }
 
+        public int ObjectNumber
+        {
+            get { return _objectNumber; }
+        }
+
+        public int Revision
+        {
+            get { return _revision; }
+        }
+
         private readonly int _objectNumber;
         private readonly int _revision;
         private ICosBase _objectItem;
 
-        public CosObject(int objectNumber, int revision) : this(objectNumber, revision, null) {} 
-
-        public CosObject(int objectNumber, int revision, ICosBase objectItem)
+        public CosObject(int objectNumber, int revision, ICosBase objectItem = null)
         {
             _objectNumber = objectNumber;
             _revision = revision;
-           
-            if(IsValidInternalObject(objectItem))
+
+            if (IsValidInternalObject(objectItem))
                 _objectItem = objectItem;
         }
-        
-        private static bool IsValidInternalObject(ICosBase internalObject)
+
+        private bool IsValidInternalObject(ICosBase internalObject)
         {
-            return internalObject.GetCosType() != CosType.Object;
+            return internalObject?.GetCosType() != CosType.Object;
         }
-        
+
         public CosType GetCosType()
         {
             return Type;
@@ -63,10 +68,10 @@ namespace SharpPdf.Writer.Primitives
             cosObjectBuilder.Append(' ');
             cosObjectBuilder.Append(_revision.ToString());
             cosObjectBuilder.Append(' ');
-            cosObjectBuilder.AppendLine(StartObject);
+            cosObjectBuilder.AppendLine(WriteConstants.StartObject);
 
             cosObjectBuilder.AppendLine(_objectItem.ToString());
-            cosObjectBuilder.Append(EndObject);
+            cosObjectBuilder.Append(WriteConstants.EndObject);
 
             return cosObjectBuilder.ToString();
         }
