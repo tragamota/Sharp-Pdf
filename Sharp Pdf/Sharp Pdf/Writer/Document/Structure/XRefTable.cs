@@ -43,9 +43,9 @@ namespace SharpPdf.Writer.Document.Structure
         public void ChangeStartIndex(int newIndex)
         {
             if (newIndex < 0)
-                throw new ArgumentOutOfRangeException("Start index can't be smaller then zero");
+                throw new ArgumentOutOfRangeException("Starting index can't be smaller then zero");
             else if(newIndex > _totalObjects)
-                throw new ArgumentOutOfRangeException("Start index can't exceed the amount of references");
+                throw new ArgumentOutOfRangeException("Starting index can't exceed the amount of references");
 
             _startIndex = newIndex;
         }
