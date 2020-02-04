@@ -19,15 +19,25 @@ namespace SharpPdf.Writer.Primitives
         {
             return Type;
         }
-
+        
         public byte[] ToBinaryValue()
-        {
+        { 
             return Encoding.Unicode.GetBytes(_integer.ToString());
         }
 
         public override string ToString()
         {
             return _integer.ToString();
+        }
+        
+        public static CosInteger operator +(CosInteger left, CosInteger right)
+        {
+            return new CosInteger(left._integer + right._integer);
+        }
+
+        public static CosInteger operator +(CosInteger left, int right)
+        {
+            return new CosInteger(left._integer + right);
         }
     }
 }
