@@ -9,6 +9,12 @@ namespace SharpPdf.Writer.Primitives
         private readonly int _objectNumber;
         private readonly int _revision;
 
+        public CosReference(CosObject referenceObject)
+        {
+            _objectNumber = referenceObject.ObjectNumber;
+            _revision = referenceObject.Revision;
+        }
+        
         public CosReference(int objectNumber, int revision)
         {
             _objectNumber = objectNumber;
