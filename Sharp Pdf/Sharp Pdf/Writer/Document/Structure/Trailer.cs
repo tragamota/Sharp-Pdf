@@ -53,6 +53,7 @@ namespace SharpPdf.Writer.Document.Structure
             trailerBuilder.AppendLine(WriteConstants.TrailerHeader);
             trailerBuilder.Append(_trailerDictionary);
             trailerBuilder.Append(WriteConstants.SingleBasedNewLine);
+            trailerBuilder.AppendLine(WriteConstants.XRefHeader);
             trailerBuilder.AppendLine(_xrefOffset.ToString());
             trailerBuilder.Append(WriteConstants.EndOfFile);
 
