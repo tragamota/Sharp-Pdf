@@ -8,7 +8,7 @@ namespace SharpPdf.Writer.Primitives
     {
         private const CosType Type = Primitives.CosType.Array;
 
-        private List<ICosBase> _arrayItems = new List<ICosBase>();
+        private readonly List<ICosBase> _arrayItems = new List<ICosBase>();
 
         public CosArray()
         {
@@ -33,9 +33,14 @@ namespace SharpPdf.Writer.Primitives
             _arrayItems.Add(item);
         }
 
-        public void Remove(int index)
+        public void RemoveAt(int index)
         {
             _arrayItems.RemoveAt(index);
+        }
+
+        public void Remove(ICosBase cosBase)
+        {
+            _arrayItems.Remove(cosBase);
         }
         
         public byte[] ToBinaryValue()
