@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using SharpPdf.Writer.Document;
+﻿using SharpPdf.Writer.Document;
 using SharpPdf.Writer.Document.Structure;
 
 namespace SharpPdf.Writer
@@ -18,7 +16,7 @@ namespace SharpPdf.Writer
         
         private readonly RootGrouper _pageRootGrouper;
 
-        public PdfWriter(ref PdfDocument document)
+        public PdfWriter( PdfDocument document)
         {
             _documentHeader = new GeneralHeader();
             //add document item collection

@@ -8,7 +8,7 @@ namespace SharpPdf.Writer.Primitives
     {
         private const CosType Type = Primitives.CosType.Array;
 
-        private readonly List<ICosBase> _arrayItems = new List<ICosBase>();
+        private readonly List<ICosBase> _arrayItems;
 
         public CosArray()
         {

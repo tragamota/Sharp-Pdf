@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using SharpPdf.Page;
+using SharpPdf.Writer;
 
 namespace SharpPdf
 {
@@ -17,24 +21,26 @@ namespace SharpPdf
         {
             get { return _pages.AsReadOnly(); }
         }
-
+        
+        public int TotalPages
+        {
+            get { return _pages.Count; }
+        }
+        
         private readonly PdfDocumentInformation _documentInfo;
+        private readonly PdfWriter _documentWriter;
         private readonly List<PdfPage> _pages;
 
         public PdfDocument()
         {
-            _documentInfo = new PdfDocumentInformation();
             _pages = new List<PdfPage>();
+            _documentWriter = new PdfWriter( ref this);
+            _documentInfo = new PdfDocumentInformation();
         }
-
-        public int TotalPages()
-        {
-            return _pages.Count;
-        }
-
+        
         public PdfPage GetPage(int pageNumber)
         {
-            var totalPages = TotalPages();
+            var totalPages = _pages.Count;
 
             if (!(pageNumber < 0 || pageNumber >= totalPages))
             {
@@ -53,11 +59,11 @@ namespace SharpPdf
         {
             PdfPage pageToAdd = null;
             
-            if (dimension == null) 
-                return pageToAdd;
+            if (dimension != null) 
+                _pages.Add(pageToAdd = new PdfPage(_pages.Count + 1, dimension));
+            else
+                throw new Exception("Dimensions out of range");
             
-            _pages.Add(pageToAdd = new PdfPage(_pages.Count + 1, dimension));
-
             return pageToAdd;
         }
 
@@ -68,7 +74,7 @@ namespace SharpPdf
 
         public void RemovePage(int index)
         {
-            var totalPages = TotalPages();
+            var totalPages = _pages.Count;
             
             if(!(index < 0 || index >= totalPages)) {
                 _pages.RemoveAt(index);
@@ -79,6 +85,9 @@ namespace SharpPdf
         {
             //check if document has 1 or more pages
             
+            if(_pages.Any())
+                throw new Exception("Document must have pages.");
+            
             return null;
         }
 
@@ -86,15 +95,16 @@ namespace SharpPdf
         {
             //check if document has 1 or more pages
             
+            if(_pages.Any()) 
+                throw new Exception("Document must have pages.");
+            
             return null;
         }
         
         public void Save(string filePath)
         {
             if (!IsValidFileExtension(Path.GetExtension(filePath)))
-            {
-                //print warning
-            }
+                throw new WarningException("The file extension is not pdf");
             
             using (var stream = File.Open(filePath, FileMode.Create))
             {
@@ -105,9 +115,8 @@ namespace SharpPdf
         public async Task SaveAsync(string filePath)
         {
             if (!IsValidFileExtension(Path.GetExtension(filePath)))
-            {
-                //print warning
-            }
+                throw new WarningException("The file extension is not pdf");
+            
             
             using (var stream = File.Open(filePath, FileMode.Create))
             {
@@ -117,12 +126,12 @@ namespace SharpPdf
             }
         }
         
-        private bool IsValidFileExtension(string fileExtension)
+        private static bool IsValidFileExtension(string fileExtension)
         {
             if (fileExtension == null)
                 return false;
             
-            return fileExtension.ToLower() == "pdf";
+            return fileExtension.ToLower() == ".pdf";
         }
     }
 }

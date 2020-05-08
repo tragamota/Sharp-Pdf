@@ -15,8 +15,5 @@
             _pageInfo = new PdfPageInfo(pageNumber, pageDimension);
             _pageResources = new PdfPageResources();
         }
-        
-        
-        
     }
 }
