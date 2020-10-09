@@ -62,7 +62,7 @@ namespace SharpPdf.Writer.Primitives
 
         public override string ToString()
         {
-            StringBuilder cosObjectBuilder = new StringBuilder();
+            var cosObjectBuilder = new StringBuilder();
 
             cosObjectBuilder.Append(_objectNumber.ToString());
             cosObjectBuilder.Append(' ');

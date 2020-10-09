@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SharpPdf.Writer.Primitives;
 
 namespace SharpPdf.Page
 {
@@ -6,6 +7,6 @@ namespace SharpPdf.Page
     {
         private List<Font.Font> _fonts;
         private List<int> _annotations;
-        private List<int> _resources;
+        private List<ICosBase> _resources;
     }
 }

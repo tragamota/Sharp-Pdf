@@ -8,6 +8,7 @@
         }
 
         private readonly PdfPageInfo _pageInfo;
+        
         private PdfPageResources _pageResources;
 
         internal PdfPage(int pageNumber, PdfPageDimension pageDimension)

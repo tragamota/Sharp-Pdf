@@ -42,7 +42,7 @@ namespace SharpPdf.Writer.Document.Structure
             xrefLineBuilder.Append(_generation.ToString("D5"));
             xrefLineBuilder.Append(' ');
             xrefLineBuilder.Append(_inUse ? 'n' : 'f');
-            xrefLineBuilder.Append("\r\n");
+            xrefLineBuilder.Append(WriteConstants.DoubleBasedNewLine);
 
             return xrefLineBuilder.ToString();
         }

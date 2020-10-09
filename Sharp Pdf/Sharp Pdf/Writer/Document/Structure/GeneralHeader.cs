@@ -3,7 +3,7 @@ using System.Text;
 
 namespace SharpPdf.Writer.Document.Structure
 {
-    internal class GeneralHeader
+    internal sealed class GeneralHeader
     {
         private const string VersionLine = "%PDF-1.7";
         private const string BinarySignature = "%¼½¾¿";

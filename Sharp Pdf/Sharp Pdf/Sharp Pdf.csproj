@@ -7,6 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Writer\Font" />
+      <PackageReference Include="System.IO.Pipelines" Version="4.7.2" />
     </ItemGroup>
 </Project>

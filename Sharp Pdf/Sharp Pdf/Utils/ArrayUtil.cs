@@ -9,12 +9,12 @@ namespace SharpPdf.Utils
         {
             byte[] totalBytes = new byte[arrays.Sum(arr => arr.Length)];
 
-            int totalBytesWriten = 0;
+            var totalBytesWritten = 0;
             
             foreach (var arr in arrays)
             {
-                Array.Copy(arr, 0, totalBytes, totalBytesWriten, arr.Length);
-                totalBytesWriten += arr.Length;
+                Array.Copy(arr, 0, totalBytes, totalBytesWritten, arr.Length);
+                totalBytesWritten += arr.Length;
             }
 
             return totalBytes;

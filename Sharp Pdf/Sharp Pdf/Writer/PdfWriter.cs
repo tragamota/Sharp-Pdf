@@ -24,14 +24,15 @@ namespace SharpPdf.Writer
             _trailer = new Trailer();
             
             _documentCache = new DocumentCache();
-            
-            _pageRootGrouper = new RootGrouper(ref document);
+            _pageRootGrouper = new RootGrouper(document);
 
             _internalDocumentReference = document;
         }
 
         public byte[] GenerateDocument()
         {
+            
+            
             return null;
         }
 
@@ -41,7 +42,7 @@ namespace SharpPdf.Writer
 
             foreach (var groupedPages in _pageRootGrouper.GroupPages())
             {
-                
+                //pageRootHead.AddPageReference(groupedPages);
             }
         }
     }

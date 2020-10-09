@@ -12,34 +12,24 @@ namespace SharpPdf.Page
         public static readonly PdfPageDimension A5 = new PdfPageDimension(420f, 595f);
         public static readonly PdfPageDimension Letter = new PdfPageDimension(612f, 792f);
 
-        public float Width
-        {
-            get { return _width; }
-        }
+        public float Width { get; }
+        public float Height { get; }
 
-        public float Height
-        {
-            get { return _height; }
-        }
-        
-        private float _width;
-        private float _height; 
-        
         public PdfPageDimension(float width, float height)
         {
             if(width <= 0f || height <= 0f)
-                throw new ArgumentException();
+                throw new ArgumentException("Page dimensions cannot be negative or zero");
 
-            _width = width;
-            _height = height;
+            Width = width;
+            Height = height;
         }
 
         public override string ToString()
         {
             return "{\n" +
                    "\ttype: " + GetType().Name + "\n" +
-                   "\twidth: " + _width + "\n" +
-                   "\theight: " + _height + "\n" +
+                   "\twidth: " + Width + "\n" +
+                   "\theight: " + Height + "\n" +
                    "}";
         }
     }
